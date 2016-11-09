@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ColorPickerSlider: 41ca62c7d8278e0b633ae16c16bd86de37314be6
+  ColorPickerSlider: 05ca947ae31afd04cec9be4c27246a2b7e0bee4d
 
 PODFILE CHECKSUM: aa6a66d329207c3ae1460a8e9cd3c8f7757ff42c
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
