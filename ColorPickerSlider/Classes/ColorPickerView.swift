@@ -10,7 +10,7 @@ import UIKit
 
 typealias ColorChangeBlock = (_ color : UIColor?) -> Void
 
-class ColorPickerView: UIView {
+open class ColorPickerView: UIView {
 
     //MARK:- Open constant
     //MARK:-
