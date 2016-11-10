@@ -14,8 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let colorPickerframe = CGRect(x: 30, y: 30, width: self.view.frame.size.width - 60, height: 30)
-        let colorPickerView = colorPickerView
+//        let colorPickerframe = CGRect(x: 30, y: 30, width: self.view.frame.size.width - 60, height: 30)
     }
 
     override func didReceiveMemoryWarning() {

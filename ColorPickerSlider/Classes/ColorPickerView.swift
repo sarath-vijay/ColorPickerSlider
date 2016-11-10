@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ColorChangeBlock = (_ color : UIColor?) -> Void
+public typealias ColorChangeBlock = (_ color : UIColor?) -> Void
 
 open class ColorPickerView: UIView {
 
@@ -31,7 +31,7 @@ open class ColorPickerView: UIView {
 
     //MARK:- Open variables
     //MARK:-
-    open var colorChnageBlock : ColorChangeBlock?
+    open var colorChangeBlock : ColorChangeBlock?
 
     //MARK:- Override Functions
     //MARK:-
@@ -64,7 +64,7 @@ open class ColorPickerView: UIView {
     internal func onSliderValueChange(slider : UISlider) {
         currentHueValue = CGFloat(slider.value)
         currentSliderColor = UIColor(hue: currentHueValue, saturation: 1, brightness: 1, alpha: 1)
-        self.colorChnageBlock?(currentSliderColor)
+        self.colorChangeBlock?(currentSliderColor)
     }
 }
 
