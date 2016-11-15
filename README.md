@@ -15,13 +15,29 @@ ColorPickerSlider is a lightweight color picker library written in swift. User w
 
 ## Installation
 
-ColorPickerSlider is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Using CocoaPods:
 
-```ruby
-pod "ColorPickerSlider"
+To integrate ColorPickerSlider into your Xcode project using CocoaPods, specify it in your Podfile:
+```swift
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+pod ’ColorPickerSlider’, ‘1.0.0'
+end
 ```
 
+Then, run the following command:
+```swift
+$ pod install
+```
+
+### Manually:
+
+* Download ColorPickerSlider.
+* Drag and drop ColorPickerSlider directory to your project
 ## Usage
 
 For including color picker in your view, add the following code
