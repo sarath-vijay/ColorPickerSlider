@@ -14,7 +14,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let colorPickerframe = CGRect(x: 30, y: 30, width: self.view.frame.size.width - 60, height: 30)
+        // Sample view to display selected color.
+        let selectedColorDisplayView = UIView(frame: CGRect(x: self.view.center.x, y: self.view.center.x, width: 50, height: 50))
+        selectedColorDisplayView.backgroundColor = UIColor.red
+        self.view.addSubview(selectedColorDisplayView)
+
+
+        // ColorPickerView initialisation
+        let colorPickerframe = CGRect(x: 30, y: 30, width: self.view.frame.size.width - 60, height: 30)
+        let colorPicker = ColorPickerView(frame: colorPickerframe)
+        colorPicker.colorChangeBlock = { color in
+            selectedColorDisplayView.backgroundColor = color
+        }
+        self.view.addSubview(colorPicker)
     }
 
     override func didReceiveMemoryWarning() {
