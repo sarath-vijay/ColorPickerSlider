@@ -42,13 +42,14 @@ $ pod install
 
 For including color picker in your view, add the following code
 
+```swift
 let colorPickerframe = __REQUIRED_FRAME__
 let colorPicker = ColorPickerView(frame: colorPickerframe)
 colorPicker.colorChangeBlock = { color in
     //Use color and do the requied.
 }
 self.view.addSubview(colorPicker)
-
+```
 
 ## Author
 
