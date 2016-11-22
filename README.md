@@ -7,6 +7,9 @@
 
 ColorPickerSlider is a lightweight color picker library written in swift. User will be presented with a slider and on sliding, user can select required color. 
 
+
+![sample_gif](https://github.com/sarath-vijay/ColorPickerSlider/blob/master/demo.gif)
+
 ## Requirements
 
 - Xcode 8
