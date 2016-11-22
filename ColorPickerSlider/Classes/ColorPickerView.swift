@@ -8,79 +8,88 @@
 
 import UIKit
 
-public typealias ColorChangeBlock = (_ color : UIColor?) -> Void
+fileprivate enum ColorPickerViewConstant {
+    static let colorPickerSliderHeightMin: CGFloat = 2.0
+    static let uiSliderHeightDefault: CGFloat = 31.0
+}
+
+public typealias ColorChangeBlock = (_ color: UIColor?) -> Void
 
 open class ColorPickerView: UIView {
 
     //MARK:- Open constant
     //MARK:-
-    
-    open var colorPickerSliderHeight : CGFloat = 2.0 //Min value
+    /**
+     User can use this value to change the slider height.
+     */
+    open var colorPickerSliderHeight: CGFloat = 2.0 //Min value
 
     //MARK:- Private variables
     //MARK:-
-    fileprivate var currentHueValue: CGFloat = 0.0
-    fileprivate var currentSliderColor: UIColor = UIColor.red
+    fileprivate var currentHueValue : CGFloat = 0.0
+    fileprivate var currentSliderColor = UIColor.red
     fileprivate var hueImage: UIImage!
-    fileprivate var slider : UISlider!
-
-    //MARK:- Private constant
-    //MARK:-
-    fileprivate let defaultUISliderHeight : CGFloat = 31
-    fileprivate let minColorPickerSliderHeight : CGFloat = 2
+    fileprivate var slider: UISlider!
 
     //MARK:- Open variables
     //MARK:-
-    open var colorChangeBlock : ColorChangeBlock?
+    open var didChangeColor: ColorChangeBlock? //SJ : didchange - meaningful name
 
     //MARK:- Override Functions
     //MARK:-
     override open func layoutSubviews() {
+
         super.layoutSubviews()
-        self.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
         update()
     }
 
     override open func draw(_ rect: CGRect) {
+
         super.draw(rect)
         if slider == nil {
-            let sliderRect = CGRect(x: rect.origin.x, y:  (rect.size.height - defaultUISliderHeight) * 0.5, width: rect.width, height: defaultUISliderHeight)
+            let sliderRect = CGRect(x: rect.origin.x, y:  (rect.size.height - ColorPickerViewConstant.uiSliderHeightDefault) * 0.5,
+                                    width: rect.width, height: ColorPickerViewConstant.uiSliderHeightDefault)
             slider = UISlider(frame: sliderRect)
             slider.setValue(0, animated: false)
             slider.addTarget(self, action: #selector(onSliderValueChange), for: UIControlEvents.valueChanged)
             slider.minimumTrackTintColor = UIColor.clear
             slider.maximumTrackTintColor = UIColor.clear
-            let heigthForSliderImage = max(colorPickerSliderHeight, minColorPickerSliderHeight)
-            let sliderImageRect : CGRect = CGRect(x: rect.origin.x, y: (rect.size.height - heigthForSliderImage) * 0.5, width: rect.width, height: heigthForSliderImage)
+            let heigthForSliderImage = max(colorPickerSliderHeight, ColorPickerViewConstant.colorPickerSliderHeightMin)
+            let sliderImageRect = CGRect(x: rect.origin.x, y: (rect.size.height - heigthForSliderImage) * 0.5,
+                                         width: rect.width, height: heigthForSliderImage)
             if hueImage != nil {
                 hueImage.draw(in: sliderImageRect)
             }
-            self.addSubview(slider)
+            addSubview(slider)
         }
     }
 
     //MARK:- Internal Functions
     //MARK:-
-    internal func onSliderValueChange(slider : UISlider) {
+    func onSliderValueChange(slider: UISlider) {
+
         currentHueValue = CGFloat(slider.value)
         currentSliderColor = UIColor(hue: currentHueValue, saturation: 1, brightness: 1, alpha: 1)
-        self.colorChangeBlock?(currentSliderColor)
+        self.didChangeColor?(currentSliderColor)
     }
 }
 
 fileprivate extension ColorPickerView {
 
     func update() {
+
         if hueImage == nil {
-            let heigthForSliderImage = max(colorPickerSliderHeight, minColorPickerSliderHeight)
-            let size : CGSize = CGSize(width: self.frame.width, height: heigthForSliderImage)
+            let heigthForSliderImage = max(colorPickerSliderHeight, ColorPickerViewConstant.colorPickerSliderHeightMin)
+            let size: CGSize = CGSize(width: frame.width, height: heigthForSliderImage)
             hueImage = generateHUEImage(size)
         }
     }
 
     func generateHUEImage(_ size: CGSize) -> UIImage {
+
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        let heigthForSliderImage = max(colorPickerSliderHeight, minColorPickerSliderHeight)
+        let heigthForSliderImage = max(colorPickerSliderHeight, ColorPickerViewConstant.colorPickerSliderHeightMin)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         UIBezierPath(roundedRect: rect, cornerRadius: heigthForSliderImage * 0.5).addClip()
         for x: Int in 0 ..< Int(size.width) {
@@ -93,4 +102,3 @@ fileprivate extension ColorPickerView {
         return image
     }
 }
-
